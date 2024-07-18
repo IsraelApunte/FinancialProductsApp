@@ -1,0 +1,33 @@
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .product-table thead tr {
+    background-color: #f2f2f2;
+  }
+  
+  .product-table th, .product-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .product-table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .product-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  
+  .product-logo {
+    width: 50px;
+    height: auto;
+  }

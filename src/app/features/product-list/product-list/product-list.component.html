@@ -1,0 +1,33 @@
+<ng-container *ngIf="products.length > 0;else noProducts">
+    <div>
+        <input type="text" [(ngModel)]="searchTerm"  placeholder="Buscar productos">
+        <button type="button" (click)="filteredProducts()">Buscar</button>
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nombre del producto</th>
+                    <th>Descripcion</th>
+                    <th>Fecha de liberación</th>
+                    <th>Fecha de restructuración</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td><img [src]="product.logo" class="product-logo"></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>01/01/2020</td>
+                    <td>01/01/2020</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        {{countResults}} resultados
+    </div>
+
+</ng-container>
+<ng-template #noProducts>
+    <p>No products available.</p>
+</ng-template>
