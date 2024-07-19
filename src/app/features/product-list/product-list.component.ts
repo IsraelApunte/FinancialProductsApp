@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { messages } from '../../messages/messages';
 import { Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -33,13 +34,27 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts() {
-    this.productService.getProducts().subscribe((data: any) => {
-      this.products = data.data;
-      this.countResults = this.products.length;
-      this.onItemsPerPageChange();
-    });
-  }
+    this.productService.getProducts().pipe(
+      tap((response: any) => {
+        if (response.data) {
+          this.products = response.data;
+          this.countResults = this.products.length;
+          this.onItemsPerPageChange();
+        }
+      }),
+      catchError((error) => {
 
+        if (error.status === 400) {
+          console.error('Error 400: Bad Request', error);
+        } else {
+          console.error('Error inesperado', error);
+
+        }
+        // Return a void observable to keep the flow going
+        return of([]);
+      })
+    ).subscribe();
+  }
   filteredProducts() {
     if (this.searchText !== '') {
       const filterList = this.products.filter(product =>

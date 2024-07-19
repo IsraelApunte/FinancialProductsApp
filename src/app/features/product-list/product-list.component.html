@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let product of displayedProducts">
-                    <div class="logo">JG</div>
+                    <div class="logo">IA</div>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.date_release}}</td>
@@ -44,7 +44,7 @@
 <div id="contextmenu" class="contextmenu" [ngStyle]="rightPanelStyle" (clickOutside)="closeContextMenu()"
     (mouseleave)="closeContextMenu()">
     <ul class="menu">
-        <li><a><em class="fa fa-pencil-square-o" aria-hidden="true"></em> Editar</a></li>
-        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-download" aria-hidden="true"></em> Eliminar</a></li>
+        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-pencil" aria-hidden="true"></em> Editar</a></li>
+        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-trash" aria-hidden="true"></em> Eliminar</a></li>
     </ul>
 </div>

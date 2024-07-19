@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductListComponent } from './product-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ProductListComponent', () => {
@@ -34,6 +33,20 @@ describe('ProductListComponent', () => {
     component.ngOnInit();
 
     expect(component.loadProducts).toHaveBeenCalled();
+  });
+
+  // Logs 'Error 400: Bad Request' when a 400 error occurs
+  it('should log "Error 400: Bad Request" when a 400 error occurs', function () {
+    const mockProductService = jasmine.createSpyObj('ProductService', ['getProducts']);
+    const router = jasmine.createSpyObj('Router', ['navigate']);
+    const mockError = { status: 400 };
+    spyOn(console, 'error');
+    mockProductService.getProducts.and.returnValue(throwError(mockError));
+
+    const component = new ProductListComponent(mockProductService, router);
+    component.loadProducts();
+
+    expect(console.error).toHaveBeenCalledWith('Error 400: Bad Request', mockError);
   });
 
   // No products are returned from the service
@@ -95,6 +108,21 @@ describe('ProductListComponent', () => {
   it('should set rightPanelStyle display to none when called', function () {
     component.closeContextMenu();
     expect(component.rightPanelStyle.display).toBe('none');
+  });
+
+  // Method logs the current product to the console
+  it('should log the current product to the console when called', function () {
+    component.currentProduct = {
+      id: "dos",
+      name: "Nombre producto",
+      description: "Descripción producto",
+      logo: "assets-1.png",
+      date_release: new Date(),
+      date_revision: new Date()
+    };
+    spyOn(console, 'log');
+    component.confirmDeleteProduct();
+    expect(console.log).toHaveBeenCalledWith('Este producto voy a eliminar', component.currentProduct);
   });
 
 });
