@@ -116,3 +116,54 @@ tbody td {
     padding: 10px;
     font-size: 15px;
 }
+
+.contextmenu {
+    display: none;
+    /* Initially hidden */
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 123px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.contextmenu .menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contextmenu .menu li {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.contextmenu .menu li:last-child {
+    border-bottom: none;
+}
+
+.contextmenu .menu li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.contextmenu .menu li a i {
+    margin-right: 10px;
+}
+
+.contextmenu .menu li a:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.contextmenu .menu li a i {
+    color: #007bff;
+}

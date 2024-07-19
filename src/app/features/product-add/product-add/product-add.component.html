@@ -66,6 +66,8 @@
             <div *ngIf="registroForm.get('date_release')?.invalid && (registroForm.get('date_release')?.dirty || registroForm.get('date_release')?.touched)"
                 class="error">
                 <div *ngIf="registroForm.get('date_release')?.errors?.['required']">El campo es requerido</div>
+                <div *ngIf="registroForm.get('date_release')?.errors?.['releaseDateInvalid']">La Fecha debe ser igual o
+                    mayor a la fecha actual</div>
             </div>
         </div>
 

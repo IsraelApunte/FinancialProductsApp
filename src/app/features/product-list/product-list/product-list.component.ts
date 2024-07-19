@@ -19,7 +19,9 @@ export class ProductListComponent implements OnInit {
   public countResults: number = 0;
   public searchText: string = '';
   public messages = messages;
-  itemsPerPage: number = 5;
+  public itemsPerPage: number = 5;
+  public rightPanelStyle: any = {}
+  public currentProduct: Product | null = null;
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -27,6 +29,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+    this.closeContextMenu();
   }
 
   loadProducts() {
@@ -57,5 +60,24 @@ export class ProductListComponent implements OnInit {
     this.router
       .navigate(['/products/add'])
       .then();
+  }
+
+  detectRighMouseClick($event: any, product: any) {
+    console.log('dsfs', $event, product);
+    if ($event.which === 1) {
+      this.rightPanelStyle = {
+        'display': 'block',
+        'position': 'absolute',
+        'left.px': $event.clientX,
+        'top.px': $event.clientY
+      };
+      this.currentProduct = product;
+    }
+  }
+
+  closeContextMenu() {
+    this.rightPanelStyle = {
+      'display': 'none',
+    };
   }
 }

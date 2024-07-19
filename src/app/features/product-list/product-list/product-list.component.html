@@ -22,7 +22,8 @@
                     <td>{{ product.description }}</td>
                     <td>{{ product.date_release}}</td>
                     <td>{{ product.date_revision}}</td>
-                    <th><em class="fa fa-ellipsis-v" aria-hidden="true"></em></th>
+                    <th><em class="fa fa-ellipsis-v" aria-hidden="true"
+                            (mouseup)="detectRighMouseClick($event, product)"></em></th>
                 </tr>
             </tbody>
         </table>
@@ -38,4 +39,12 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="contextmenu" class="contextmenu" [ngStyle]="rightPanelStyle" (clickOutside)="closeContextMenu()"
+    (mouseleave)="closeContextMenu()">
+    <ul class="menu">
+        <li><a><em class="fa fa-pencil-square-o" aria-hidden="true"></em> Editar</a></li>
+        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-download" aria-hidden="true"></em> Eliminar</a></li>
+    </ul>
 </div>
