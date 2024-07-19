@@ -8,9 +8,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  private baseUrl = '/api/bp/products';
+  public baseUrl = '/api/bp/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../core/services/product.service';
-import { Product } from '../../../core/models/product.model';
+import { ProductService } from '../../core/services/product.service';
+import { Product } from '../../core/models/product.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { messages } from '../../../messages/messages';
+import { messages } from '../../messages/messages';
 import { Router } from '@angular/router';
 
 @Component({
@@ -79,5 +79,9 @@ export class ProductListComponent implements OnInit {
     this.rightPanelStyle = {
       'display': 'none',
     };
+  }
+
+  confirmDeleteProduct() {
+    console.log('Este producto voy a eliminar', this.currentProduct);
   }
 }

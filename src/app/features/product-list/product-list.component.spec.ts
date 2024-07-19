@@ -70,5 +70,31 @@ describe('ProductListComponent', () => {
     expect(component.filteredProducts).toHaveBeenCalled();
   });
 
-  
+  // Detects right mouse click and displays context menu
+  it('should display context menu when right mouse button is clicked', function () {
+    const event = { which: 1, clientX: 100, clientY: 200 };
+    const product = {
+      id: "dos",
+      name: "Nombre producto",
+      description: "Descripción producto",
+      logo: "assets-1.png",
+      date_release: new Date(),
+      date_revision: new Date()
+    };
+    component.detectRighMouseClick(event, product);
+    expect(component.rightPanelStyle).toEqual({
+      'display': 'block',
+      'position': 'absolute',
+      'left.px': 100,
+      'top.px': 200
+    });
+    expect(component.currentProduct).toBe(product);
+  });
+
+  // closeContextMenu sets rightPanelStyle display to none
+  it('should set rightPanelStyle display to none when called', function () {
+    component.closeContextMenu();
+    expect(component.rightPanelStyle.display).toBe('none');
+  });
+
 });
