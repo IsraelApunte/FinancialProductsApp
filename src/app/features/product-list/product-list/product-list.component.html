@@ -1,33 +1,41 @@
-<ng-container *ngIf="products.length > 0;else noProducts">
-    <div>
-        <input type="text" [(ngModel)]="searchTerm"  placeholder="Buscar productos">
-        <button type="button" (click)="filteredProducts()">Buscar</button>
-        <table class="product-table">
+<div class="container">
+    <h1>🏦BANCO</h1>
+    <div class="table-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Buscar productos" class="search-box">
+        <button type="button" (click)="filteredProducts()" class="search-button">Buscar</button>
+        <button type="button" (click)="goToAddProduct()" class="search-button float-right">A&ntilde;adir</button>
+        <table>
             <thead>
                 <tr>
                     <th>Logo</th>
                     <th>Nombre del producto</th>
-                    <th>Descripcion</th>
-                    <th>Fecha de liberación</th>
-                    <th>Fecha de restructuración</th>
+                    <th>Descripción <em class="info-icon">i</em></th>
+                    <th>Fecha de liberaci&oacute;n <em class="info-icon">i</em></th>
+                    <th>Fecha de reestructuraci&oacute;n <em class="info-icon">i</em></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products">
-                    <td><img [src]="product.logo" class="product-logo"></td>
+                <tr *ngFor="let product of displayedProducts">
+                    <div class="logo">JG</div>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
-                    <td>01/01/2020</td>
-                    <td>01/01/2020</td>
+                    <td>{{ product.date_release}}</td>
+                    <td>{{ product.date_revision}}</td>
+                    <th><em class="fa fa-ellipsis-v" aria-hidden="true"></em></th>
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div>
-        {{countResults}} resultados
-    </div>
 
-</ng-container>
-<ng-template #noProducts>
-    <p>No products available.</p>
-</ng-template>
+        <div class="paginator row">
+            <div class="results-count">
+                {{countResults}} Resultados
+            </div>
+            <div class="items-per-page">
+                <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                    <option *ngFor="let count of [5, 10, 20]" [value]="count">{{ count }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
