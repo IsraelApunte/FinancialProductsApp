@@ -13,7 +13,7 @@ import { releaseDateValidator } from '../../core/validators/custom-date-validato
 })
 export class ProductAddComponent implements OnInit {
   public registroForm: FormGroup;
-  errorMessage: string = '';
+  public errorMessage = '';
 
   constructor(
     public fb: FormBuilder,
@@ -40,6 +40,7 @@ export class ProductAddComponent implements OnInit {
       if (exists) {
         alert('El producto ya existe.');
       } else {
+        this.registroForm.value['date_revision'] = this.registroForm.controls['date_revision'].value
         this.productService.addProduct(this.registroForm.value).subscribe((data: any) => {
           alert('Se agregó correctamente');
           console.log('Esta es la respuesta', data);

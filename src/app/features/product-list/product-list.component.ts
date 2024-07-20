@@ -17,11 +17,11 @@ import { catchError, of, tap } from 'rxjs';
 export class ProductListComponent implements OnInit {
   public products: Product[] = [];
   public displayedProducts: Product[] = [];
-  public countResults: number = 0;
-  public searchText: string = '';
+  public countResults = 0;
+  public searchText = '';
   public messages = messages;
-  public itemsPerPage: number = 5;
-  public rightPanelStyle: any = {}
+  public itemsPerPage = 5;
+  public rightPanelStyle: any ;
   public currentProduct: Product | null = null;
   constructor(
     private productService: ProductService,

@@ -1,7 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ProductService } from './product.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { Product } from '../models/product.model';
 
