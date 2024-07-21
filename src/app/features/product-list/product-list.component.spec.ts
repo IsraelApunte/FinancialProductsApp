@@ -125,4 +125,6 @@ describe('ProductListComponent', () => {
     expect(console.log).toHaveBeenCalledWith('Este producto voy a eliminar', component.currentProduct);
   });
 
+  
+
 });

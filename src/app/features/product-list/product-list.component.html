@@ -44,7 +44,7 @@
 <div id="contextmenu" class="contextmenu" [ngStyle]="rightPanelStyle" (clickOutside)="closeContextMenu()"
     (mouseleave)="closeContextMenu()">
     <ul class="menu">
-        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-pencil" aria-hidden="true"></em> Editar</a></li>
+        <li (click)="goToEdit()"><a><em class="fa fa-pencil" aria-hidden="true"></em> Editar</a></li>
         <li (click)="confirmDeleteProduct()"><a><em class="fa fa-trash" aria-hidden="true"></em> Eliminar</a></li>
     </ul>
 </div>

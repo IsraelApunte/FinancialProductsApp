@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
 import { releaseDateValidator } from '../../core/validators/custom-date-validator';
+import { Router } from '@angular/router';
+import { Product } from '../../core/models/product.model';
 @Component({
   selector: 'app-product-add',
   standalone: true,
@@ -13,13 +15,17 @@ import { releaseDateValidator } from '../../core/validators/custom-date-validato
 })
 export class ProductAddComponent implements OnInit {
   public registroForm: FormGroup;
-  public errorMessage = '';
+  public state: any;
+  public flagToCreate = false;
+  private router = inject(Router);
+  private location = inject(Location);
 
   constructor(
     public fb: FormBuilder,
     public productService: ProductService,
-    private location: Location,
   ) {
+    const navigation = this.router?.getCurrentNavigation();
+    this.state = navigation?.extras?.state as { product: Product };
     this.registroForm = this.fb.group({
       id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
@@ -32,25 +38,12 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.onChangeDateRelease();
-  }
-
-  onSubmit() {
-    const productId = this.registroForm.get('id')?.value;
-    this.productService.verifyProductId(productId).subscribe((exists: boolean) => {
-      if (exists) {
-        alert('El producto ya existe.');
-      } else {
-        this.registroForm.value['date_revision'] = this.registroForm.controls['date_revision'].value
-        this.productService.addProduct(this.registroForm.value).subscribe((data: any) => {
-          alert('Se agregó correctamente');
-          console.log('Esta es la respuesta', data);
-        }, (error) => {
-          console.error('Error al agregar el producto', error);
-        });
-      }
-    }, (error: any) => {
-      console.error('Error al verificar la existencia del producto', error);
-    });
+    /* The line `this.flagToCreate is a flag to know if componet have to create 
+    when is true o edit when is false */
+    this.flagToCreate = this.state ? false : true;
+    if (!this.flagToCreate) {
+      this.registroForm.patchValue(this.state);
+    }
   }
 
   onReset() {
@@ -70,6 +63,39 @@ export class ProductAddComponent implements OnInit {
         this.registroForm.get('date_revision')?.setValue(revisionDate.toISOString().split('T')[0], { emitEvent: false });
       }
     });
+  }
+
+  onSubmit() {
+    if (this.flagToCreate) {
+      this.saveProduct();
+    } else {
+      this.editProduct();
+    }
+
+  }
+
+  saveProduct() {
+    const productId = this.registroForm.get('id')?.value;
+    this.productService.verifyProductId(productId).subscribe((exists: boolean) => {
+      if (exists) {
+        alert('El producto ya existe.');
+      } else {
+        this.registroForm.value['date_revision'] = this.registroForm.controls['date_revision']?.value
+        this.productService.addProduct(this.registroForm.value).subscribe((data: any) => {
+          alert('Se agregó correctamente');
+          console.log('Esta es la respuesta', data);
+        }, (error) => {
+          console.error('Error al agregar el producto', error);
+        });
+      }
+    }, (error: any) => {
+      console.error('Error al verificar la existencia del producto', error);
+    });
+  }
+
+
+  editProduct() {
+    console.log('Entro al editar');
   }
 
 }

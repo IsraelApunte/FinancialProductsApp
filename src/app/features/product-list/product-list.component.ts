@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
   public searchText = '';
   public messages = messages;
   public itemsPerPage = 5;
-  public rightPanelStyle: any ;
+  public rightPanelStyle: any;
   public currentProduct: Product | null = null;
   constructor(
     private productService: ProductService,
@@ -43,12 +43,10 @@ export class ProductListComponent implements OnInit {
         }
       }),
       catchError((error) => {
-
         if (error.status === 400) {
           console.error('Error 400: Bad Request', error);
         } else {
-          console.error('Error inesperado', error);
-
+          console.error('Error inesperado 💀', error);
         }
         // Return a void observable to keep the flow going
         return of([]);
@@ -98,5 +96,12 @@ export class ProductListComponent implements OnInit {
 
   confirmDeleteProduct() {
     console.log('Este producto voy a eliminar', this.currentProduct);
+  }
+
+  goToEdit() {
+    const productToEdit = { ...this.currentProduct };
+    this.router
+      .navigate(['/products/add'], { state: productToEdit || {} })
+      .then();
   }
 }

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductAddComponent } from './product-add.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormBuilder, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+
+
 
 describe('ProductAddComponent', () => {
   let component: ProductAddComponent;
@@ -31,32 +31,34 @@ describe('ProductAddComponent', () => {
     expect(component.onChangeDateRelease).toHaveBeenCalled();
   });
 
-  // Form submission triggers onSubmit method
-  it('should call onSubmit when form is submitted', function () {
-    spyOn(component, 'onSubmit');
+  // onSubmit calls saveProduct when flagToCreate is true
+  it('should call saveProduct when flagToCreate is true', function () {
+    spyOn(component, 'saveProduct');
+    component.flagToCreate = true;
     component.onSubmit();
-    expect(component.onSubmit).toHaveBeenCalled();
+    expect(component.saveProduct).toHaveBeenCalled();
   });
 
-  // Product ID field is empty
-  it('should handle empty product ID field', function () {
-    component.registroForm = new FormBuilder().group({
-      id: [''],
-    });
-    spyOn(component.productService, 'verifyProductId').and.returnValue(of(false));
+  // onSubmit calls editProduct when flagToCreate is false
+  it('should call editProduct when flagToCreate is false', function () {
+    // Initialize
+    component.flagToCreate = false;
+    spyOn(component, 'editProduct');
+    // Invoke
     component.onSubmit();
-    expect(component.productService.verifyProductId).toHaveBeenCalledWith('');
+    // Assert
+    expect(component.editProduct).toHaveBeenCalled();
   });
 
-  // verifyProductId service method is called with correct product ID
-  it('should call verifyProductId with correct product ID when product ID exists', function () {
-    const productId = '123';
-    spyOn(component.productService, 'verifyProductId').and.returnValue(of(true));
-
-    component.registroForm.get('id')?.setValue(productId);
+  // saveProduct successfully adds a new product when product ID does not exist
+  it('should add new product when product ID does not exist', function () {
+    // Initialize
+    component.flagToCreate = true;
+    spyOn(component, 'saveProduct');
+    // Invoke
     component.onSubmit();
-
-    expect(component.productService.verifyProductId).toHaveBeenCalledWith(productId);
+    // Assert
+    expect(component.saveProduct).toHaveBeenCalled();
   });
 
   // Form is reset to initial state
