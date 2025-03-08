@@ -1,0 +1,100 @@
+<h2>🏦BANCO</h2>
+<div class="container">
+    <div class="form-container">
+        <div class="containers">
+            <button type="button" class="return-button" (click)="goToList()"><em class="fa fa-undo text-danger"
+                    (click)="goToList()"></em></button>
+        </div>
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+            <h1 class="form-title">Formulario de registro</h1>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input id="id" formControlName="id" type="text"
+                        [ngClass]="{'error-border': registroForm.get('id')?.invalid && (registroForm.get('id')?.dirty || registroForm.get('id')?.touched)}">
+                    <div *ngIf="registroForm.get('id')?.invalid && (registroForm.get('id')?.dirty || registroForm.get('id')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('id')?.errors?.['required']">ID no v&aacute;lido</div>
+                        <div *ngIf="registroForm.get('id')?.errors?.['minlength']">El ID debe tener al menos 3
+                            caracteres</div>
+                        <div *ngIf="registroForm.get('id')?.errors?.['maxlength']">El ID no puede tener más de 10
+                            caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input id="name" formControlName="name" type="text"
+                        [ngClass]="{'error-border': registroForm.get('name')?.invalid && (registroForm.get('name')?.dirty || registroForm.get('name')?.touched)}">
+                    <div *ngIf="registroForm.get('name')?.invalid && (registroForm.get('name')?.dirty || registroForm.get('name')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('name')?.errors?.['required']">El campo es requerido</div>
+                        <div *ngIf="registroForm.get('name')?.errors?.['minlength']">El Nombre debe tener al menos 5
+                            caracteres</div>
+                        <div *ngIf="registroForm.get('name')?.errors?.['maxlength']">El Nombre no puede tener más de 100
+                            caracteres</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="description">Descripci&oacute;n</label>
+                    <input id="description" formControlName="description" type="text"
+                        [ngClass]="{'error-border': registroForm.get('description')?.invalid && (registroForm.get('description')?.dirty || registroForm.get('description')?.touched)}">
+                    <div *ngIf="registroForm.get('description')?.invalid && (registroForm.get('description')?.dirty || registroForm.get('description')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('description')?.errors?.['required']">El campo es requerido</div>
+                        <div *ngIf="registroForm.get('description')?.errors?.['minlength']">El Descripci&oacute;n debe
+                            tener al menos 5 caracteres</div>
+                        <div *ngIf="registroForm.get('description')?.errors?.['maxlength']">El Descripci&oacute;n no
+                            puede tener más de 100 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="logo">Logo</label>
+                    <input id="logo" formControlName="logo" type="text"
+                        [ngClass]="{'error-border': registroForm.get('logo')?.invalid && (registroForm.get('logo')?.dirty || registroForm.get('logo')?.touched)}">
+                    <div *ngIf="registroForm.get('logo')?.invalid && (registroForm.get('logo')?.dirty || registroForm.get('logo')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('logo')?.errors">Este campo es requerido</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date_release">Fecha Liberación</label>
+                    <input id="date_release" formControlName="date_release" type="date"
+                        [ngClass]="{'error-border': registroForm.get('date_release')?.invalid && (registroForm.get('date_release')?.dirty || registroForm.get('date_release')?.touched)}">
+                    <div *ngIf="registroForm.get('date_release')?.invalid && (registroForm.get('date_release')?.dirty || registroForm.get('date_release')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('date_release')?.errors?.['required']">El campo es requerido</div>
+                        <div *ngIf="registroForm.get('date_release')?.errors?.['releaseDateInvalid']">La debe ser mayor
+                            a la fecha actual</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date_revision">Fecha Revisión</label>
+                    <input id="date_revision" formControlName="date_revision" type="date"
+                        [ngClass]="{'error-border': registroForm.get('date_revision')?.invalid && (registroForm.get('date_revision')?.dirty || registroForm.get('date_revision')?.touched)}">
+                    <div *ngIf="registroForm.get('date_revision')?.invalid && (registroForm.get('date_revision')?.dirty || registroForm.get('date_revision')?.touched)"
+                        class="error">
+                        <div *ngIf="registroForm.get('date_revision')?.errors?.['required']">El campo es requerido</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" (click)="onReset()">Reiniciar</button>
+                <button type="submit" [disabled]="registroForm.invalid" [ngStyle]="{
+                    'background-color': registroForm.invalid ? 'gray' : '#ffc107',
+                    'color': registroForm.invalid ? 'darkgray' : 'white',
+                    'cursor': registroForm.invalid ? 'not-allowed' : 'pointer'}">Enviar</button>
+            </div>
+        </form>
+
+    </div>
+</div>

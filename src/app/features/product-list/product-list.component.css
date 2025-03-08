@@ -1,0 +1,261 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 50px;
+    background-color: #f6f6f6;
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+    margin-bottom: 1rem;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 0 4px 4px 0;
+    background-color: #ffd100;
+    color: #0f265c;
+    border-left: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-family: "prelo-book", sans-serif;
+    font-size: 0.9rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+.search-button.float-right {
+    float: right;
+}
+
+.search-button:hover {
+    background-color: #ffd100;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "prelo-semibold", sans-serif !important;
+}
+
+thead th {
+    background-color: rgb(240, 237, 236);
+    padding: 10px;
+    text-align: left;
+    font-size: 13px;
+    font-family: "prelo-semibold", sans-serif !important;
+    /* Asegurando que el encabezado también tenga la misma fuente */
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+    font-family: "prelo-semibold", sans-serif !important;
+    /* Asegurando que las celdas también tengan la misma fuente */
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #bdc3c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.info-icon {
+    font-style: normal;
+    background-color: #95a5a6;
+    color: white;
+    border-radius: 50%;
+    padding: 0px 6px;
+    margin-left: 5px;
+}
+
+.paginator.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+}
+
+.results-count {
+    font-family: "preloslab-semibold", sans-serif;
+    text-align: left;
+    font-size: 14px;
+}
+
+.items-per-page {
+    text-align: right;
+}
+
+.items-per-page select {
+    padding: 10px;
+    font-size: 15px;
+}
+
+.contextmenu {
+    display: none;
+    /* Initially hidden */
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 123px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.contextmenu .menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contextmenu .menu li {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.contextmenu .menu li:last-child {
+    border-bottom: none;
+}
+
+.contextmenu .menu li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.contextmenu .menu li a i {
+    margin-right: 10px;
+}
+
+.contextmenu .menu li a:hover {
+    background-color: #f5f5f5;
+    color: #007bff;
+}
+
+.contextmenu .menu li a i {
+    color: #007bff;
+}
+
+.logo-img {
+    width: 40px;  
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    display: block; 
+    margin: auto;
+}
+
+/* Fondo oscuro cuando el modal está abierto */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Caja del modal */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Texto del modal */
+  .modal-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Footer del modal con los botones */
+  .modal-footer {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+  }
+  
+  /* Estilos del botón de cancelar */
+  .cancel-btn {
+    background: #e0e4eb;
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 45%;
+  }
+  
+  /* Estilos del botón de confirmar */
+  .confirm-btn {
+    background: #ffeb99;
+    color: #555;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 45%;
+  }
+  
+  /* Efectos al pasar el mouse */
+  .cancel-btn:hover {
+    background: #d6dae3;
+  }
+  
+  .confirm-btn:hover {
+    background: #ffe066;
+  }
+  

@@ -1,0 +1,68 @@
+<h2>🏦BANCO</h2>
+<div class="container">
+    <div class="table-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Buscar productos" class="search-box">
+        <button type="button" (click)="filteredProducts()" class="search-button">Buscar</button>
+        <button type="button" (click)="goToAddProduct()" class="search-button float-right">A&ntilde;adir</button>
+        <div class="containerTable" style="background-color: white; padding: 20px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Logo</th>
+                        <th>Nombre del producto</th>
+                        <th>Descripción <em appTooltip="Descripción del producto" class="info-icon">i</em></th>
+                        <th>Fecha de liberaci&oacute;n <em appTooltip="Fecha de liberaci&oacute;n del producto"
+                                class="info-icon">i</em></th>
+                        <th>Fecha de reestructuraci&oacute;n <em
+                                appTooltip="Fecha de reestructuraci&oacute;n del producto" class="info-icon">i</em></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of displayedProducts">
+                        <td>
+                            <img [src]="product.logo | defaultImage" class="logo-img" [alt]="product.name">
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.date_release}}</td>
+                        <td>{{ product.date_revision}}</td>
+                        <th><em class="fa fa-ellipsis-v" aria-hidden="true"
+                                (mouseup)="detectRighMouseClick($event, product)"></em></th>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="paginator row">
+                <div class="results-count">
+                    {{countResults}} Resultados
+                </div>
+                <div class="items-per-page">
+                    <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                        <option *ngFor="let count of [5, 10, 20]" [value]="count">{{ count }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contextmenu" class="contextmenu" [ngStyle]="rightPanelStyle" (clickOutside)="closeContextMenu()"
+    (mouseleave)="closeContextMenu()">
+    <ul class="menu">
+        <li (click)="goToEdit()"><a><em class="fa fa-pencil" aria-hidden="true"></em> Editar</a></li>
+        <li (click)="confirmDeleteProduct()"><a><em class="fa fa-trash" aria-hidden="true"></em> Eliminar</a></li>
+    </ul>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalVisible">
+    <div class="modal">
+        <p class="modal-text">
+            ¿Estás seguro de <strong>eliminar</strong> el producto <strong>{{ currentProduct?.name }}</strong>?
+        </p>
+        <div class="modal-footer">
+            <button class="cancel-btn" (click)="onCancel()">Cancelar</button>
+            <button class="confirm-btn" (click)="deleteProduct()">Confirmar</button>
+        </div>
+    </div>
+</div>
