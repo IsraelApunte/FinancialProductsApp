@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Ejecutando pruebas antes de hacer commit..."
+npm run test:ci
+
+if [ $? -ne 0 ]; then
+  echo "❌ Las pruebas han fallado. No se permite el commit."
+  exit 1
+fi
+
+echo "✅ Todas las pruebas pasaron. Procediendo con el commit..."
