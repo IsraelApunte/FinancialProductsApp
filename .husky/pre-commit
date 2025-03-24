@@ -1,7 +1,17 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Ejecutando pruebas antes de hacer commit..."
+echo "🔍 Ejecutando ESLint..."
+npm run lint:ci
+
+if [ $? -ne 0 ]; then
+  echo "❌ Errores de linting detectados. Corrígelos antes de hacer commit."
+  exit 1
+fi
+
+echo "✅ No hay errores de linting."
+
+echo "🧪 Ejecutando pruebas..."
 npm run test:ci
 
 if [ $? -ne 0 ]; then
