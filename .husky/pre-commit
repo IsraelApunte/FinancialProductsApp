@@ -20,3 +20,4 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "✅ Todas las pruebas pasaron. Procediendo con el commit..."
+
