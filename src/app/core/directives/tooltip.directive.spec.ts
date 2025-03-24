@@ -8,7 +8,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 })
 class TestComponent {}
 
-xdescribe('TooltipDirective', () => {
+describe('TooltipDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let buttonElement: HTMLElement;
   let directiveInstance: TooltipDirective;
